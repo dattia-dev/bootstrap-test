@@ -19,7 +19,7 @@ function main() {
       # if terminfo not installed, default to xterm
       infocmp >/dev/null 2>&1 || TERM=xterm
       sudo apt update -y
-      sudo apt upgrade -y
+      (export UCF_FORCE_CONFOLD=1; sudo apt upgrade -y --autoremove)
       sudo apt-get install -y curl git keychain ssh
       sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
       export PATH="$HOME/.local/bin:$PATH"

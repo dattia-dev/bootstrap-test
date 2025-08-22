@@ -15,8 +15,10 @@ function main() {
       ;;
     Linux)
       echo "Detected Linux"
+      TERM={$TERM:-xterm}
       command -v apt >/dev/null || exit_with_error "Unsupported Linux distro"
       sudo apt update
+      sudo apt upgrade
       sudo apt-get install -y curl git keychain ssh
       sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
       export PATH="$HOME/.local/bin:$PATH"
@@ -26,17 +28,9 @@ function main() {
       exit 1
       ;;
   esac
-
-  while :
-  do
-    read -p "Repo: " REPO
-    if [ -n "$REPO" ]; then
-      break
-    fi
-  done
-
+  
   # Initialize chezmoi from your repo
-  chezmoi init --apply "$REPO" --ssh
+  chezmoi init --apply dattia-dev --ssh
 }
 
 exit_with_error() {

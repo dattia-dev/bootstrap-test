@@ -15,8 +15,9 @@ function main() {
       ;;
     Linux)
       echo "Detected Linux"
-      TERM={$TERM:-xterm}
       command -v apt >/dev/null || exit_with_error "Unsupported Linux distro"
+      # if terminfo not installed, default to xterm
+      infocmp >/dev/null 2>&1 || TERM=xterm
       sudo apt update -y
       sudo apt upgrade -y
       sudo apt-get install -y curl git keychain ssh

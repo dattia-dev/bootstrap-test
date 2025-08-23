@@ -30,7 +30,7 @@ function main() {
       ;;
   esac
   
-  # Initialize chezmoi from your repo
+  # Initialize chezmoi from repo
   chezmoi init --apply dattia-dev --ssh
 }
 

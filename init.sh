@@ -31,6 +31,7 @@ function main() {
   esac
   
   eval $(ssh-agent -s) >/dev/null
+  ssh-add
   
   # Initialize chezmoi from your repo
   chezmoi init --apply dattia-dev --ssh

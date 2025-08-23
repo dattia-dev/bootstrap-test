@@ -18,9 +18,9 @@ function main() {
       command -v apt >/dev/null || exit_with_error "Unsupported Linux distro"
       # if terminfo not installed, default to xterm
       infocmp >/dev/null 2>&1 || TERM=xterm
-      sudo apt update -y
-      (export UCF_FORCE_CONFOLD=1; sudo apt upgrade -y --autoremove)
-      sudo apt-get install -y curl git keychain ssh
+      sudo apt-get update -y
+      sudo apt-get upgrade -y --autoremove
+      sudo apt-get install -y curl git ssh
       sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
       export PATH="$HOME/.local/bin:$PATH"
       ;;
@@ -29,6 +29,8 @@ function main() {
       exit 1
       ;;
   esac
+  
+  eval $(ssh-agent -s) >/dev/null
   
   # Initialize chezmoi from your repo
   chezmoi init --apply dattia-dev --ssh

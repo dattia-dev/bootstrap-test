@@ -18,9 +18,9 @@ function main() {
       command -v apt >/dev/null || exit_with_error "Unsupported Linux distro"
       # if terminfo not installed, default to xterm
       infocmp >/dev/null 2>&1 || TERM=xterm
-      sudo apt-get update -y
-      sudo apt-get upgrade -y --autoremove
-      sudo apt-get install -y curl git ssh
+      sudo apt update -y
+      sudo apt upgrade -y --autoremove
+      sudo apt install -y curl git ssh
       sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
       export PATH="$HOME/.local/bin:$PATH"
       ;;
